@@ -1,0 +1,81 @@
+/* ==========================================================================
+   OES THEME - LOGIN PAGE STYLING
+   ========================================================================== */
+
+body.pagelayout-login {
+    background: linear-gradient(135deg, #001830 0%, #002b49 55%, #004d7a 100%) !important;
+    min-height: 100vh;
+
+    #page {
+        background: transparent !important;
+    }
+
+    .login-container {
+        max-width: 480px;
+        margin: 4rem auto 2rem;
+    }
+
+    .card.login-card {
+        background: #ffffff !important;
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+        border-radius: 24px !important;
+        padding: 2.5rem 2.25rem !important;
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35) !important;
+
+        &::before {
+            content: "🔒 SECURE CANDIDATE PORTAL";
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0076a8;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            margin-bottom: 1.25rem;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.6rem !important;
+            font-weight: 800 !important;
+            color: #002244 !important;
+            margin-bottom: 0.5rem !important;
+        }
+
+        .form-label {
+            font-weight: 600 !important;
+            color: #334155 !important;
+            font-size: 0.88rem !important;
+        }
+
+        .form-control {
+            border-radius: 12px !important;
+            border: 1.5px solid #cbd5e1 !important;
+            padding: 11px 16px !important;
+            font-size: 0.95rem !important;
+
+            &:focus {
+                border-color: #0076a8 !important;
+                box-shadow: 0 0 0 3px rgba(0, 118, 168, 0.18) !important;
+            }
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #002b49 0%, #005b8f 100%) !important;
+            border: none !important;
+            border-radius: 12px !important;
+            padding: 12px !important;
+            font-weight: 700 !important;
+            font-size: 1rem !important;
+            box-shadow: 0 4px 16px rgba(0, 43, 73, 0.25) !important;
+            transition: all 0.25s ease !important;
+
+            &:hover {
+                background: linear-gradient(135deg, #003b64 0%, #0076a8 100%) !important;
+                transform: translateY(-2px) !important;
+                box-shadow: 0 8px 24px rgba(0, 43, 73, 0.35) !important;
+            }
+        }
+    }
+}

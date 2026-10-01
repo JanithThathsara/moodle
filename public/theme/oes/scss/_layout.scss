@@ -1,0 +1,112 @@
+/* ==========================================================================
+   OES THEME - BALANCED LAYOUT & WIDTH ARCHITECTURE
+   Eliminates excess left/right white blank margins while establishing a
+   cohesive, professional, wide canvas across all resolutions.
+   ========================================================================== */
+
+// --- Global Body & Page Canvas ---
+body {
+    background-color: #f4f8fb !important;
+    color: #1a2a3a;
+    overflow-x: hidden;
+}
+
+#page {
+    background-color: #f4f8fb !important;
+}
+
+#page-wrapper {
+    background-color: #f4f8fb !important;
+}
+
+// --- Drawer Layout Spacing & Gutters ---
+#page.drawers {
+    margin-top: 68px !important;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+    background-color: transparent !important;
+
+    @media (min-width: 768px) {
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+
+    @media (min-width: 1400px) {
+        padding-left: 2.5rem !important;
+        padding-right: 2.5rem !important;
+    }
+}
+
+// --- Universal Balanced Container Width Override ---
+// Overrides Moodle Boost's narrow 830px default to modern 1400px
+#page.drawers .main-inner,
+body.limitedwidth #page.drawers .main-inner,
+.pagelayout-standard #page.drawers .main-inner,
+.pagelayout-course #page.drawers .main-inner,
+.pagelayout-incourse #page.drawers .main-inner,
+.pagelayout-mydashboard #page.drawers .main-inner,
+.pagelayout-frontpage #page.drawers .main-inner,
+.pagelayout-admin #page.drawers .main-inner,
+.pagelayout-report #page.drawers .main-inner {
+    max-width: 1400px !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+}
+
+// Secondary Navigation & Header Alignment to match 1400px
+.header-maxwidth,
+.secondary-navigation,
+.secondary-navigation > .container-fluid,
+.activity-header,
+.footer-popover,
+.stickyfooter .sticky-footer-content {
+    max-width: 1400px !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+// --- Frontpage & Dashboard: Clean Seamless Canvas ---
+// Prevents the "white box inside page" double-margin syndrome on card-based pages
+.pagelayout-frontpage #page.drawers .main-inner,
+.pagelayout-mydashboard #page.drawers .main-inner,
+#page-site-index #page.drawers .main-inner,
+#page-my-index #page.drawers .main-inner {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 2.5rem !important;
+}
+
+// --- Course & Standard Content Pages: Spacious White Card ---
+.pagelayout-course #page.drawers .main-inner,
+.pagelayout-incourse #page.drawers .main-inner,
+.pagelayout-standard #page.drawers .main-inner,
+.pagelayout-admin #page.drawers .main-inner,
+.pagelayout-report #page.drawers .main-inner {
+    background-color: #ffffff !important;
+    border: 1px solid #dce8f2 !important;
+    border-radius: 20px !important;
+    box-shadow: 0 4px 20px rgba(0, 34, 68, 0.05) !important;
+    padding: 2rem 2.25rem !important;
+    margin-top: 1rem !important;
+    margin-bottom: 3rem !important;
+
+    @media (max-width: 767px) {
+        padding: 1.25rem 1rem !important;
+        border-radius: 14px !important;
+    }
+}
+
+// --- Full Width Content Region ---
+#region-main-box,
+#region-main,
+.course-content {
+    width: 100% !important;
+    max-width: 100% !important;
+}

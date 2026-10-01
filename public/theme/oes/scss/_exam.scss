@@ -1,0 +1,241 @@
+/* ==========================================================================
+   OES THEME - EXAMINATION & QUIZ INTERFACE
+   ========================================================================== */
+
+// --- Question Container (.que) ---
+.que {
+    background: #ffffff !important;
+    border: 1px solid #dce8f2 !important;
+    border-radius: 20px !important;
+    padding: 1.75rem !important;
+    margin-bottom: 2rem !important;
+    box-shadow: 0 4px 18px rgba(0, 34, 68, 0.05) !important;
+    position: relative !important;
+
+    .info {
+        background: #f8fbfe !important;
+        border: 1px solid #e2eef6 !important;
+        border-radius: 14px !important;
+        padding: 1rem !important;
+        margin-bottom: 1.25rem !important;
+
+        .no {
+            font-size: 1.1rem !important;
+            font-weight: 800 !important;
+            color: #002b49 !important;
+            margin-bottom: 0.25rem !important;
+        }
+
+        .status {
+            font-size: 0.82rem !important;
+            color: #64748b !important;
+            font-weight: 600 !important;
+        }
+
+        .grade {
+            font-size: 0.85rem !important;
+            font-weight: 700 !important;
+            color: #0076a8 !important;
+            background: #e0f2fe !important;
+            padding: 3px 8px !important;
+            border-radius: 6px !important;
+            display: inline-block !important;
+            margin-top: 0.35rem !important;
+        }
+
+        .questionflag {
+            margin-top: 0.5rem !important;
+
+            input[type="checkbox"] {
+                accent-color: #f59e0b !important;
+            }
+        }
+    }
+
+    // Question content & formulation
+    .content {
+        .formulation {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+
+            .qtext {
+                font-size: 1.1rem !important;
+                font-weight: 600 !important;
+                color: #0f172a !important;
+                line-height: 1.65 !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            // Multiple choice answer options
+            .answer {
+                div.r0,
+                div.r1 {
+                    display: flex !important;
+                    align-items: center !important;
+                    background: #f8fafc !important;
+                    border: 1.5px solid #e2e8f0 !important;
+                    border-radius: 12px !important;
+                    padding: 12px 18px !important;
+                    margin-bottom: 10px !important;
+                    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                    cursor: pointer !important;
+
+                    label {
+                        margin-bottom: 0 !important;
+                        cursor: pointer !important;
+                        width: 100% !important;
+                        color: #1e293b !important;
+                        font-size: 0.98rem !important;
+                    }
+
+                    input[type="radio"],
+                    input[type="checkbox"] {
+                        margin-right: 12px !important;
+                        width: 18px !important;
+                        height: 18px !important;
+                        accent-color: #0076a8 !important;
+                    }
+
+                    &:hover {
+                        background: #f0f9ff !important;
+                        border-color: #0076a8 !important;
+                        transform: translateX(4px);
+                    }
+
+                    &:has(input:checked) {
+                        background: #e0f2fe !important;
+                        border-color: #0076a8 !important;
+                        box-shadow: 0 0 0 3px rgba(0, 118, 168, 0.15) !important;
+                        font-weight: 600 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// --- Floating Exam Timer Widget ---
+#quiz-timer-wrapper,
+#quiz-timer {
+    background: #002244 !important;
+    color: #ffffff !important;
+    border: 2px solid #00a3e0 !important;
+    border-radius: 14px !important;
+    padding: 10px 18px !important;
+    font-weight: 800 !important;
+    font-size: 1.15rem !important;
+    letter-spacing: 0.5px !important;
+    box-shadow: 0 8px 24px rgba(0, 34, 68, 0.2) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+
+    &::before {
+        content: "\f017";
+        font-family: "FontAwesome";
+        color: #f59e0b;
+        font-size: 1.1rem;
+    }
+
+    // Urgency state when timer < 5 min
+    &.quiz-timer-danger,
+    &.danger {
+        background: #991b1b !important;
+        border-color: #ef4444 !important;
+        animation: pulseWarning 1.2s infinite;
+    }
+}
+
+@keyframes pulseWarning {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+}
+
+// --- Question Navigation Panel ---
+#mod_quiz_navblock {
+    .qnbutton {
+        width: 38px !important;
+        height: 38px !important;
+        border-radius: 8px !important;
+        font-weight: 700 !important;
+        font-size: 0.9rem !important;
+        border: 1.5px solid #cbd5e1 !important;
+        background: #ffffff !important;
+        color: #002b49 !important;
+        transition: all 0.2s ease !important;
+
+        &.notyetanswered {
+            background: #f8fafc !important;
+        }
+
+        &.answersaved {
+            background: #002b49 !important;
+            color: #ffffff !important;
+            border-color: #002b49 !important;
+        }
+
+        &.thispage {
+            border-color: #00a3e0 !important;
+            box-shadow: 0 0 0 2px rgba(0, 163, 224, 0.3) !important;
+        }
+
+        &.flagged {
+            position: relative;
+            &::after {
+                content: '';
+                position: absolute;
+                top: 2px;
+                right: 2px;
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: #f59e0b;
+            }
+        }
+    }
+}
+
+// --- SAFE EXAM BROWSER (SEB) REQUIREMENT NOTICE ---
+.quizsebnotification,
+.path-mod-quiz .quizinfo {
+    background: #ffffff !important;
+    border: 2px solid #0076a8 !important;
+    border-radius: 20px !important;
+    padding: 2rem !important;
+    margin: 2rem 0 !important;
+    box-shadow: 0 8px 30px rgba(0, 43, 73, 0.1) !important;
+    position: relative !important;
+
+    &::before {
+        content: "🔒 SECURE LOCKDOWN REQUIRED";
+        display: inline-block;
+        background: #002b49;
+        color: #f59e0b;
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        padding: 4px 12px;
+        border-radius: 50px;
+        margin-bottom: 1rem;
+    }
+
+    h3, h4 {
+        color: #002244 !important;
+        font-weight: 800 !important;
+    }
+
+    p {
+        color: #334155 !important;
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+    }
+
+    .btn {
+        border-radius: 12px !important;
+        padding: 10px 22px !important;
+        font-weight: 700 !important;
+        margin-right: 0.75rem !important;
+        margin-top: 0.75rem !important;
+    }
+}

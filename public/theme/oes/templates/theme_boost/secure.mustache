@@ -1,0 +1,94 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_oes/secure
+
+    Boost secure layout template for OES examination environment.
+}}
+{{> theme_boost/head }}
+
+<body {{{ bodyattributes }}}>
+{{> core/local/toast/wrapper}}
+
+<div id="page-wrapper" class="oes-exam-wrapper">
+
+    {{{ output.standard_top_of_body_html }}}
+
+    {{> theme_boost/navbar-secure }}
+
+    <!-- Secure Exam Header Alert -->
+    <div class="oes-exam-security-banner">
+        <div class="container-fluid d-flex flex-wrap align-items-center justify-content-between py-2 px-3">
+            <div class="d-flex align-items-center">
+                <i class="fa fa-shield-alt text-warning me-2 fa-lg"></i>
+                <span class="oes-exam-notice-text">
+                    <strong>MPMA Examination Security Active</strong> — Browser lockdown &amp; session integrity monitored.
+                </span>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-dark text-white-50 px-2 py-1"><i class="fa fa-eye text-success me-1"></i> Monitored Attempt</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="page" class="container-fluid oes-secure-page-container">
+        <header id="page-header" class="row" data-for="page-heading">
+            <div class="col-12 py-3">
+                <div class="page-context-header">
+                    <div class="page-header-headings">
+                        {{{ output.page_heading }}}
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div id="page-content" class="row">
+            <div id="region-main-box" class="col-12">
+                <div id="region-main" {{#hasblocks}}class="has-blocks"{{/hasblocks}}>
+                    {{{ output.course_content_header }}}
+                    {{#headercontent}}
+                        {{> core/activity_header }}
+                    {{/headercontent}}
+                    {{{ output.main_content }}}
+                    {{{ output.course_content_footer }}}
+                </div>
+                {{#hasblocks}}
+                <div data-region="blocks-column" class="oes-exam-blocks-column">
+                    {{{ sidepreblocks }}}
+                </div>
+                {{/hasblocks}}
+            </div>
+        </div>
+    </div>
+
+    <footer id="page-footer" class="py-2 text-center text-muted small bg-light border-top">
+        <div class="container">
+            <p class="mb-0">Mahapola Ports &amp; Maritime Academy • Online Examination System • Secure Session</p>
+            <div id="course-footer">{{{ output.course_footer }}}</div>
+            {{{ output.standard_end_of_body_html }}}
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>
+{{#js}}
+M.util.js_pending('theme_boost/loader');
+require(['theme_boost/loader'], function() {
+    M.util.js_complete('theme_boost/loader');
+});
+{{/js}}

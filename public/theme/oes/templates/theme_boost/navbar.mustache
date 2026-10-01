@@ -1,0 +1,99 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_oes/navbar
+
+    This template renders the top navbar for OES with Lockdown Browser download action.
+}}
+<nav class="navbar fixed-top bg-body navbar-expand" aria-label="{{#str}}sitemenubar, admin{{/str}}">
+    <div class="container-fluid">
+        <button class="navbar-toggler aabtn d-block d-md-none px-1 my-1 border-0" data-toggler="drawers" data-action="toggle" data-target="theme_boost-drawers-primary">
+            <span class="navbar-toggler-icon"></span>
+            <span class="visually-hidden">{{#str}}sidepanel, core{{/str}}</span>
+        </button>
+
+        <a href="{{{ config.homeurl }}}" class="navbar-brand d-none d-md-flex align-items-center m-0 me-4 p-0 aabtn">
+            {{# output.should_display_navbar_logo }}
+                <img src="{{output.get_compact_logo_url}}" class="logo me-2" alt="{{sitename}}">
+            {{/ output.should_display_navbar_logo }}
+            <span class="oes-brand-text">
+                <span class="oes-brand-title">{{{ sitename }}}</span>
+                <span class="oes-brand-subtitle d-none d-lg-block">MPMA Examination Portal</span>
+            </span>
+        </a>
+
+        {{#primarymoremenu}}
+            <div class="primary-navigation">
+                {{> core/moremenu}}
+            </div>
+        {{/primarymoremenu}}
+
+        {{# output.page_heading_menu}}
+            <ul class="navbar-nav d-none d-md-flex my-1 px-1">
+                <!-- page_heading_menu -->
+                {{{ output.page_heading_menu }}}
+            </ul>
+        {{/output.page_heading_menu}}
+
+        <div id="usernavigation" class="navbar-nav ms-auto h-100 align-items-center">
+            <!-- Dedicated Lockdown Browser Download Action -->
+            <div class="oes-lockdown-nav-item d-flex align-items-center me-2">
+                <a href="{{#lockdown_url}}{{{lockdown_url}}}{{/lockdown_url}}{{^lockdown_url}}https://safeexambrowser.org/download_en.html{{/lockdown_url}}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="oes-lockdown-btn d-inline-flex align-items-center gap-2"
+                   title="{{#str}}lockdown_browser_tooltip, theme_oes{{/str}}">
+                    <span class="oes-lockdown-icon-wrap">
+                        <i class="fa fa-shield-alt text-warning"></i>
+                    </span>
+                    <span class="oes-lockdown-text-group d-none d-sm-inline-flex flex-column text-start">
+                        <span class="oes-lockdown-label fw-bold">{{#str}}lockdown_browser, theme_oes{{/str}}</span>
+                        <span class="oes-lockdown-sub small text-white-50" style="font-size: 10px; line-height: 1;">Required for Exams</span>
+                    </span>
+                    <span class="badge bg-warning text-dark px-1 py-0 d-none d-md-inline-block text-uppercase" style="font-size: 9px; letter-spacing: 0.5px; font-weight: 700;">
+                        <i class="fa fa-download me-1"></i>GET
+                    </span>
+                </a>
+            </div>
+
+            {{# output.search_box }}
+                {{{ output.search_box }}}
+                <div class="divider border-start h-75 align-self-center mx-1"></div>
+            {{/output.search_box}}
+
+            {{#langmenu}}
+                {{> theme_boost/language_menu }}
+                <div class="divider border-start h-75 align-self-center mx-1"></div>
+            {{/langmenu}}
+
+            {{{ output.edit_switch }}}
+
+            {{# output.navbar_plugin_output }}
+                {{{ . }}}
+                <div class="divider border-start h-75 align-self-center mx-1"></div>
+            {{/output.navbar_plugin_output}}
+
+            {{#usermenu}}
+                <div class="d-flex align-items-stretch usermenu-container" data-region="usermenu">
+                    {{> core/user_menu }}
+                </div>
+            {{/usermenu}}
+        </div>
+    </div>
+</nav>
+
+{{> theme_boost/primary-drawer-mobile }}

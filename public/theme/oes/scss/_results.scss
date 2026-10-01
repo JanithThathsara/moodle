@@ -1,0 +1,81 @@
+/* ==========================================================================
+   OES THEME - EXAMINATION RESULTS & GRADE STYLING
+   ========================================================================== */
+
+// --- Grade Tables & Summaries ---
+.generaltable,
+.gradestable {
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    border: 1px solid #dce8f2 !important;
+    background: #ffffff !important;
+    box-shadow: 0 4px 18px rgba(0, 34, 68, 0.05) !important;
+    margin-bottom: 2rem !important;
+
+    thead th {
+        background: #002b49 !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        font-size: 0.9rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        padding: 14px 18px !important;
+        border: none !important;
+    }
+
+    tbody td {
+        padding: 14px 18px !important;
+        border-color: #f1f5f9 !important;
+        color: #334155 !important;
+        vertical-align: middle !important;
+    }
+
+    tbody tr:hover {
+        background: #f8fbfe !important;
+    }
+}
+
+// --- Quiz Review Summary Box ---
+.quizreviewsummary {
+    background: #ffffff !important;
+    border: 1px solid #dce8f2 !important;
+    border-radius: 18px !important;
+    padding: 1.5rem 1.75rem !important;
+    margin-bottom: 2rem !important;
+    box-shadow: 0 4px 16px rgba(0, 34, 68, 0.05) !important;
+
+    th {
+        color: #002b49 !important;
+        font-weight: 700 !important;
+        width: 30% !important;
+    }
+
+    td {
+        color: #1e293b !important;
+    }
+}
+
+// Feedback badges
+.que .outcome {
+    border-radius: 12px !important;
+    padding: 12px 18px !important;
+    margin-top: 1rem !important;
+
+    &.correct {
+        background: #ecfdf5 !important;
+        border: 1px solid #10b981 !important;
+        color: #065f46 !important;
+    }
+
+    &.incorrect {
+        background: #fef2f2 !important;
+        border: 1px solid #ef4444 !important;
+        color: #991b1b !important;
+    }
+
+    &.partiallycorrect {
+        background: #fffbeb !important;
+        border: 1px solid #f59e0b !important;
+        color: #92400e !important;
+    }
+}

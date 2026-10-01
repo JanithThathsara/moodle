@@ -1,0 +1,90 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_oes/core_course/coursecard
+
+    OES high-quality aligned course / examination card.
+}}
+<div class="card course-card oes-course-card mx-1" role="listitem"
+    data-region="course-content"
+    data-course-id="{{{id}}}">
+
+    <!-- Card Media & Badges -->
+    <div class="oes-card-media-wrapper position-relative">
+        <a href="{{viewurl}}" tabindex="-1" class="oes-card-img-link d-block">
+            <div class="card-img-top oes-card-img" style='background-image: url("{{{courseimage}}}");'>
+                <span class="visually-hidden">{{fullname}}</span>
+            </div>
+            <div class="oes-card-img-overlay"></div>
+        </a>
+
+        <!-- Status Tag -->
+        <div class="oes-card-status-badge position-absolute top-0 start-0 m-3">
+            <span class="badge oes-badge-exam">
+                <i class="fa fa-clipboard-check me-1"></i>ONLINE EXAM
+            </span>
+        </div>
+
+        <!-- 3-Dots Menu -->
+        <div class="oes-card-menu-top position-absolute top-0 end-0 m-2">
+            {{$menu}}{{/menu}}
+        </div>
+    </div>
+
+    <!-- Card Content Body -->
+    <div class="card-body oes-card-body d-flex flex-column flex-grow-1" id="course-info-container-{{id}}-{{uniqid}}">
+        <!-- Category & Code Row -->
+        <div class="oes-card-meta d-flex align-items-center justify-content-between mb-2">
+            <div class="oes-card-category text-truncate">
+                {{$coursecategory}}{{/coursecategory}}
+            </div>
+            {{#showshortname}}
+                <span class="badge bg-light text-secondary border oes-shortname-badge">
+                    {{{shortname}}}
+                </span>
+            {{/showshortname}}
+        </div>
+
+        <!-- Course Title (Clamped to 2 lines for uniform height) -->
+        <h4 class="oes-card-title mb-2">
+            <a href="{{viewurl}}" class="aalink coursename oes-title-link" title="{{fullname}}">
+                {{> core_course/favouriteicon }}
+                <span class="visually-hidden">{{#str}}aria:coursename, core_course{{/str}}</span>
+                {{$coursename}}{{/coursename}}
+            </a>
+        </h4>
+
+        {{^visible}}
+            <div class="mb-2">
+                <span class="badge bg-warning text-dark">{{#str}} hiddenfromstudents {{/str}}</span>
+            </div>
+        {{/visible}}
+
+        <!-- Progress (if applicable) -->
+        <div class="oes-card-progress mt-auto pt-2">
+            {{$progress}}{{/progress}}
+        </div>
+
+        <!-- Pinned Aligned Action Button -->
+        <div class="oes-card-action mt-3 pt-2 border-top">
+            <a href="{{viewurl}}" class="btn btn-primary w-100 oes-btn-enter-exam d-flex align-items-center justify-content-center gap-2">
+                <span>{{#str}}enterexam, theme_oes{{/str}}</span>
+                <i class="fa fa-arrow-right fa-sm"></i>
+            </a>
+        </div>
+    </div>
+</div>

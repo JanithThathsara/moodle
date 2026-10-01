@@ -1,0 +1,49 @@
+/* ==========================================================================
+   OES THEME - VARIABLES & DESIGN TOKENS
+   Mahapola Ports & Maritime Academy (MPMA / SLPA)
+   ========================================================================== */
+
+// --- Maritime Academy Color Palette ---
+$oes-navy-darker:     #001830;
+$oes-navy-dark:       #002244;
+$oes-navy-primary:    #002b49;
+$oes-navy-light:      #003b64;
+
+$oes-blue-ocean:      #005b8f;
+$oes-blue-accent:     #0076a8;
+$oes-blue-vibrant:    #00a3e0;
+$oes-blue-sky:        #38bdf8;
+
+$oes-ice-lightest:    #f8fbfe;
+$oes-ice-light:       #f4f8fb;
+$oes-ice-mid:         #e7f3fa;
+$oes-ice-border:      #d6e7f2;
+
+$oes-gold-primary:    #f59e0b;
+$oes-gold-light:      #fef3c7;
+$oes-gold-dark:       #b45309;
+
+$oes-success:         #107e54;
+$oes-success-bg:      #e8f8f0;
+$oes-danger:          #c02b2b;
+$oes-danger-bg:       #fdf0f0;
+
+$oes-text-main:       #0f172a;
+$oes-text-muted:      #475569;
+$oes-text-subtle:     #64748b;
+
+// --- Shadows & Elevations ---
+$oes-shadow-sm:       0 2px 8px rgba(0, 34, 68, 0.06);
+$oes-shadow-md:       0 8px 24px rgba(0, 34, 68, 0.09);
+$oes-shadow-lg:       0 16px 40px rgba(0, 34, 68, 0.14);
+$oes-shadow-hover:    0 20px 48px rgba(0, 34, 68, 0.18);
+
+// --- Border Radius Tokens ---
+$oes-radius-sm:       8px;
+$oes-radius-md:       14px;
+$oes-radius-lg:       20px;
+$oes-radius-pill:     9999px;
+
+// --- Transitions ---
+$oes-transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+$oes-transition-med:  all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

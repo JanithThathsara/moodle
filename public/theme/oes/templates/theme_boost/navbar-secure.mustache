@@ -1,0 +1,53 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_oes/navbar-secure
+
+    Secure top navbar for exam environment.
+}}
+<nav class="navbar fixed-top bg-body navbar-expand oes-navbar-secure" aria-label="{{#str}}sitemenubar, admin{{/str}}">
+    <div class="container-fluid">
+        <div class="navbar-brand d-flex align-items-center m-0 p-0 aabtn">
+            {{# output.should_display_navbar_logo }}
+                <img src="{{output.get_compact_logo_url}}" class="logo me-2" alt="{{sitename}}">
+            {{/ output.should_display_navbar_logo }}
+            <span class="oes-secure-brand">
+                <span class="oes-secure-title">{{{ sitename }}}</span>
+                <span class="oes-secure-subtitle d-none d-md-inline ms-2 text-white-50">| MPMA Examination Security</span>
+            </span>
+        </div>
+
+        <div class="oes-secure-status-pill ms-auto d-flex align-items-center me-3">
+            <span class="oes-pulse-dot me-2"></span>
+            <span class="fw-bold small text-uppercase letter-spacing-1 text-warning">
+                <i class="fa fa-lock me-1"></i> SECURE LOCKDOWN MODE
+            </span>
+        </div>
+
+        {{# output.secure_layout_language_menu }}
+        <ul class="nav navbar-nav language-menu my-1">
+            {{{ . }}}
+        </ul>
+        {{/ output.secure_layout_language_menu }}
+
+        {{# output.secure_layout_login_info }}
+        <div class="nav-link oes-secure-user-badge">
+            {{{ . }}}
+        </div>
+        {{/ output.secure_layout_login_info }}
+    </div>
+</nav>

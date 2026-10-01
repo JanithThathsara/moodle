@@ -1,0 +1,109 @@
+/* ==========================================================================
+   OES THEME - SECURE LOCKDOWN ENVIRONMENT STYLING
+   ========================================================================== */
+
+// Top security alert bar in exam layout
+.oes-exam-security-banner {
+    background: #001830;
+    color: #ffffff;
+    border-bottom: 2px solid #f59e0b;
+    font-size: 0.88rem;
+
+    .oes-exam-notice-text {
+        color: #e2e8f0;
+        letter-spacing: 0.2px;
+
+        strong {
+            color: #f59e0b;
+        }
+    }
+}
+
+// Secure navbar
+.oes-navbar-secure {
+    background: #001830 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+
+    .oes-secure-brand {
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 1.1rem;
+    }
+
+    .oes-secure-status-pill {
+        background: rgba(245, 158, 11, 0.15);
+        border: 1px solid rgba(245, 158, 11, 0.4);
+        padding: 5px 12px;
+        border-radius: 50px;
+    }
+}
+
+// Pulsing live indicator
+.oes-pulse-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: oesPulse 1.8s infinite;
+}
+
+@keyframes oesPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+// Active lockdown page container
+body.pagelayout-secure,
+body.oes-secure-exam-mode {
+    background-color: #f4f8fb !important;
+    background-image: radial-gradient(#d6e7f2 1px, transparent 1px) !important;
+    background-size: 24px 24px !important;
+
+    // Disallow text selection inside questions during exams
+    .qtext,
+    .formulation {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    #page-header {
+        border-bottom: 1px solid #e2e8f0;
+        margin-bottom: 1.5rem;
+    }
+
+    .oes-secure-page-container {
+        max-width: 1400px !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+        padding: 1.5rem !important;
+
+        #region-main {
+            background: #ffffff;
+            border: 1px solid #dce8f2;
+            border-radius: 20px;
+            padding: 2rem 2.25rem;
+            box-shadow: 0 4px 20px rgba(0, 34, 68, 0.05);
+        }
+    }
+}
+
+// Print suppression for exam security
+@media print {
+    body.pagelayout-secure,
+    body.oes-secure-exam-mode,
+    .oes-exam-wrapper {
+        display: none !important;
+        visibility: hidden !important;
+    }
+}

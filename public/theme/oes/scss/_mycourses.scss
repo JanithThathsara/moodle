@@ -1,0 +1,295 @@
+/* ==========================================================================
+   OES THEME - COURSES & EXAMS CARD GRID ALIGNMENT
+   Guarantees equal heights, uniform image ratios, clamped titles,
+   and pinned bottom action buttons.
+   ========================================================================== */
+
+// --- Main Grid Container for Course / Exam Overview ---
+.block_myoverview,
+.dashboard-card-deck,
+[data-region="courses-view"] {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+
+    .card-grid,
+    [data-region="card-deck"] {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)) !important;
+        gap: 24px !important;
+        margin: 0 !important;
+        padding: 10px 0 30px !important;
+
+        // Reset bootstrap col constraints
+        > [class*="col"] {
+            width: 100% !important;
+            max-width: none !important;
+            flex: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            display: flex !important;
+        }
+    }
+}
+
+// --- Individual Course / Examination Card ---
+.card.course-card,
+.oes-course-card {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: #ffffff !important;
+    border: 1px solid #dce8f2 !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 18px rgba(0, 34, 68, 0.06) !important;
+    position: relative !important;
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.28s ease,
+                border-color 0.28s ease !important;
+
+    &:hover {
+        transform: translateY(-6px) !important;
+        border-color: #0076a8 !important;
+        box-shadow: 0 16px 36px rgba(0, 34, 68, 0.13) !important;
+
+        .card-img-top,
+        .oes-card-img {
+            transform: scale(1.04);
+        }
+
+        .oes-title-link,
+        .coursename {
+            color: #0076a8 !important;
+        }
+    }
+
+    // Media & Image Area
+    .oes-card-media-wrapper,
+    a[tabindex="-1"] {
+        display: block !important;
+        overflow: hidden !important;
+        position: relative !important;
+        height: 180px !important;
+        min-height: 180px !important;
+        max-height: 180px !important;
+        background: linear-gradient(135deg, #001b33 0%, #002b49 60%, #005b8f 100%) !important;
+    }
+
+    .card-img-top,
+    .oes-card-img {
+        width: 100% !important;
+        height: 180px !important;
+        min-height: 180px !important;
+        max-height: 180px !important;
+        background-size: cover !important;
+        background-position: center !important;
+        border-radius: 0 !important;
+        transition: transform 0.4s ease !important;
+    }
+
+    // Badges on image
+    .oes-card-status-badge {
+        z-index: 2;
+
+        .oes-badge-exam {
+            background: rgba(0, 24, 48, 0.88) !important;
+            backdrop-filter: blur(4px);
+            color: #38bdf8 !important;
+            border: 1px solid rgba(56, 189, 248, 0.35) !important;
+            border-radius: 50px !important;
+            font-size: 10px !important;
+            font-weight: 800 !important;
+            letter-spacing: 0.6px !important;
+            padding: 5px 11px !important;
+            text-transform: uppercase !important;
+        }
+    }
+
+    .oes-card-menu-top {
+        z-index: 2;
+
+        .btn {
+            background: rgba(0, 24, 48, 0.6) !important;
+            backdrop-filter: blur(4px);
+            color: #ffffff !important;
+            border-radius: 50% !important;
+            width: 32px !important;
+            height: 32px !important;
+            padding: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            border: none !important;
+
+            &:hover {
+                background: #002b49 !important;
+                color: #38bdf8 !important;
+            }
+        }
+    }
+
+    // --- Card Body Flex Container ---
+    .card-body,
+    .oes-card-body {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 1 auto !important;
+        padding: 22px !important;
+        background: #ffffff !important;
+
+        .oes-card-meta {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            margin-bottom: 0.5rem !important;
+
+            .oes-card-category,
+            .categoryname {
+                font-size: 0.78rem !important;
+                font-weight: 800 !important;
+                color: #0076a8 !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.6px !important;
+            }
+
+            .oes-shortname-badge {
+                font-size: 0.72rem !important;
+                font-weight: 700 !important;
+                background: #f1f5f9 !important;
+                color: #475569 !important;
+                border: 1px solid #e2e8f0 !important;
+                border-radius: 6px !important;
+                padding: 3px 7px !important;
+            }
+        }
+
+        // Standardized Clamped Title
+        .oes-card-title,
+        .coursename {
+            font-size: 1.15rem !important;
+            font-weight: 700 !important;
+            line-height: 1.4 !important;
+            color: #002244 !important;
+            margin-bottom: 0.5rem !important;
+            text-decoration: none !important;
+
+            // Strict 2-line clamp with uniform height
+            display: -webkit-box !important;
+            -webkit-line-clamp: 2 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+            min-height: 2.8em !important;
+            max-height: 2.8em !important;
+
+            a {
+                color: inherit !important;
+                text-decoration: none !important;
+            }
+        }
+
+        // Progress section
+        .oes-card-progress {
+            margin-top: auto !important;
+            padding-top: 0.5rem !important;
+
+            .progress {
+                height: 6px !important;
+                border-radius: 3px !important;
+                background-color: #e2e8f0 !important;
+
+                .progress-bar {
+                    background: linear-gradient(90deg, #0076a8 0%, #00a3e0 100%) !important;
+                }
+            }
+        }
+
+        // Pinned Bottom Button Action
+        .oes-card-action {
+            margin-top: auto !important;
+            padding-top: 1rem !important;
+            border-top: 1px solid #f1f5f9 !important;
+            width: 100% !important;
+
+            .oes-btn-enter-exam,
+            .btn-primary {
+                height: 44px !important;
+                background: linear-gradient(135deg, #002b49 0%, #005b8f 100%) !important;
+                border: none !important;
+                border-radius: 12px !important;
+                font-weight: 700 !important;
+                font-size: 0.92rem !important;
+                color: #ffffff !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 0.5rem !important;
+                box-shadow: 0 4px 12px rgba(0, 43, 73, 0.15) !important;
+                transition: all 0.25s ease !important;
+                text-decoration: none !important;
+
+                &:hover {
+                    background: linear-gradient(135deg, #003b64 0%, #0076a8 100%) !important;
+                    transform: translateY(-2px) !important;
+                    box-shadow: 0 8px 20px rgba(0, 43, 73, 0.25) !important;
+                    color: #ffffff !important;
+                }
+            }
+        }
+    }
+}
+
+// --- Course Filters & Controls Bar ---
+.block_myoverview [data-region="filter"] {
+    background: #ffffff !important;
+    border: 1px solid #dce8f2 !important;
+    border-radius: 16px !important;
+    padding: 12px 18px !important;
+    margin-bottom: 1.5rem !important;
+    box-shadow: 0 2px 10px rgba(0, 34, 68, 0.04) !important;
+
+    .dropdown-toggle {
+        border-radius: 10px !important;
+        border: 1px solid #cbd5e1 !important;
+        font-weight: 600 !important;
+        font-size: 0.88rem !important;
+        color: #002b49 !important;
+        background: #f8fafc !important;
+        padding: 6px 14px !important;
+
+        &:hover {
+            background: #ffffff !important;
+            border-color: #0076a8 !important;
+        }
+    }
+
+    .form-control {
+        border-radius: 10px !important;
+        border: 1px solid #cbd5e1 !important;
+        font-size: 0.88rem !important;
+    }
+}
+
+// --- Archive Course List / Category Styling (/course/index.php) ---
+.coursebox {
+    background: #ffffff !important;
+    border: 1px solid #dce8f2 !important;
+    border-radius: 16px !important;
+    padding: 1.25rem 1.5rem !important;
+    margin-bottom: 1.25rem !important;
+    box-shadow: 0 2px 8px rgba(0, 34, 68, 0.04) !important;
+    transition: all 0.25s ease !important;
+
+    &:hover {
+        border-color: #0076a8 !important;
+        box-shadow: 0 8px 24px rgba(0, 34, 68, 0.1) !important;
+        transform: translateY(-3px) !important;
+    }
+
+    .coursename a {
+        color: #002244 !important;
+        font-weight: 700 !important;
+        font-size: 1.15rem !important;
+    }
+}

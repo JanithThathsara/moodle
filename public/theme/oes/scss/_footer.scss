@@ -1,0 +1,34 @@
+/* ==========================================================================
+   OES THEME - MARITIME ACADEMY FOOTER STYLING
+   ========================================================================== */
+
+#page-footer {
+    background: #001830 !important;
+    color: #94a3b8 !important;
+    border-top: 3px solid #005b8f !important;
+    padding: 3rem 1rem 2rem !important;
+    margin-top: 4rem !important;
+
+    a {
+        color: #38bdf8 !important;
+        text-decoration: none !important;
+
+        &:hover {
+            color: #ffffff !important;
+            text-decoration: underline !important;
+        }
+    }
+
+    .footer-content-debugging,
+    .tool_dataprivacy {
+        display: none !important;
+    }
+
+    .container {
+        max-width: 1400px !important;
+    }
+
+    .logininfo {
+        color: #94a3b8 !important;
+    }
+}
