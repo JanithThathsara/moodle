@@ -53,8 +53,8 @@
             <!-- Dedicated Lockdown Browser Download Action -->
             <div class="oes-lockdown-nav-item d-flex align-items-center me-2">
                 <a href="{{#lockdown_url}}{{{lockdown_url}}}{{/lockdown_url}}{{^lockdown_url}}https://safeexambrowser.org/download_en.html{{/lockdown_url}}"
-                   target="_blank"
-                   rel="noopener noreferrer"
+                   {{#is_local_download}}download="{{#local_installer_name}}{{{local_installer_name}}}{{/local_installer_name}}{{^local_installer_name}}SEB_Setup.exe{{/local_installer_name}}"{{/is_local_download}}
+                   {{^is_local_download}}target="_blank" rel="noopener noreferrer"{{/is_local_download}}
                    class="oes-lockdown-btn d-inline-flex align-items-center gap-2"
                    title="{{#str}}lockdown_browser_tooltip, theme_oes{{/str}}">
                     <span class="oes-lockdown-icon-wrap">
@@ -62,7 +62,7 @@
                     </span>
                     <span class="oes-lockdown-text-group d-none d-sm-inline-flex flex-column text-start">
                         <span class="oes-lockdown-label fw-bold">{{#str}}lockdown_browser, theme_oes{{/str}}</span>
-                        <span class="oes-lockdown-sub small text-white-50" style="font-size: 10px; line-height: 1;">Required for Exams</span>
+                        <span class="oes-lockdown-sub small text-white-50" style="font-size: 10px; line-height: 1;">{{#is_local_download}}Direct Offline Setup{{/is_local_download}}{{^is_local_download}}Required for Exams{{/is_local_download}}</span>
                     </span>
                     <span class="badge bg-warning text-dark px-1 py-0 d-none d-md-inline-block text-uppercase" style="font-size: 9px; letter-spacing: 0.5px; font-weight: 700;">
                         <i class="fa fa-download me-1"></i>GET

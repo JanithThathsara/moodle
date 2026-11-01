@@ -57,8 +57,8 @@
         </header>
 
         <div id="page-content" class="row">
-            <div id="region-main-box" class="col-12">
-                <div id="region-main" {{#hasblocks}}class="has-blocks"{{/hasblocks}}>
+            <div id="region-main-box" class="col-12 oes-exam-layout-wrapper">
+                <div id="region-main" class="oes-exam-main-region {{#hasblocks}}has-blocks{{/hasblocks}}">
                     {{{ output.course_content_header }}}
                     {{#headercontent}}
                         {{> core/activity_header }}
@@ -67,10 +67,63 @@
                     {{{ output.course_content_footer }}}
                 </div>
                 {{#hasblocks}}
-                <div data-region="blocks-column" class="oes-exam-blocks-column">
-                    {{{ sidepreblocks }}}
-                </div>
+                <aside data-region="blocks-column" class="oes-exam-blocks-column" aria-label="Exam Question Navigation">
+                    <div class="oes-sticky-nav-panel">
+                        {{{ sidepreblocks }}}
+                    </div>
+                </aside>
                 {{/hasblocks}}
+            </div>
+        </div>
+    </div>
+
+    <!-- Candidate Identity Watermark Layer -->
+    <div class="oes-exam-watermark-grid" aria-hidden="true">
+        <div class="oes-watermark-item">{{{ candidate_name }}} ({{{ candidate_id }}}) • {{{ session_time }}}</div>
+        <div class="oes-watermark-item">{{{ candidate_name }}} ({{{ candidate_id }}}) • {{{ session_time }}}</div>
+        <div class="oes-watermark-item">{{{ candidate_name }}} ({{{ candidate_id }}}) • {{{ session_time }}}</div>
+        <div class="oes-watermark-item">{{{ candidate_name }}} ({{{ candidate_id }}}) • {{{ session_time }}}</div>
+        <div class="oes-watermark-item">{{{ candidate_name }}} ({{{ candidate_id }}}) • {{{ session_time }}}</div>
+        <div class="oes-watermark-item">{{{ candidate_name }}} ({{{ candidate_id }}}) • {{{ session_time }}}</div>
+    </div>
+
+    <!-- Security Alert Floating Toast -->
+    <div id="oes-exam-security-toast" class="oes-security-toast d-none" role="alert" aria-live="assertive">
+        <div class="oes-toast-content d-flex align-items-center gap-3">
+            <div class="oes-toast-icon">
+                <i class="fa fa-shield-alt fa-lg text-danger"></i>
+            </div>
+            <div class="oes-toast-body flex-grow-1">
+                <strong class="d-block text-warning small text-uppercase letter-spacing-1">Exam Security Policy</strong>
+                <span id="oes-toast-msg" class="text-white small">Action blocked by examination lockdown policy.</span>
+            </div>
+            <button type="button" class="btn-close btn-close-white ms-auto small" onclick="document.getElementById('oes-exam-security-toast').classList.add('d-none');" aria-label="Close"></button>
+        </div>
+    </div>
+
+    <!-- Tab Switch / Window Blur Violation Modal -->
+    <div id="oes-focus-violation-modal" class="oes-security-modal-backdrop d-none" tabindex="-1">
+        <div class="oes-security-modal-dialog">
+            <div class="oes-security-modal-content">
+                <div class="oes-modal-header text-center pb-2">
+                    <div class="oes-modal-icon-wrap mx-auto mb-2">
+                        <i class="fa fa-exclamation-triangle text-danger fa-2x"></i>
+                    </div>
+                    <h5 class="modal-title fw-bold text-danger text-uppercase">Security Violation Detected</h5>
+                    <p class="text-muted small mb-0">Examination Window Focus Was Lost</p>
+                </div>
+                <div class="oes-modal-body py-3 text-center">
+                    <p class="mb-2">
+                        Tab switching, opening other applications, or using screenshot capture tools is <strong>strictly prohibited</strong> during this examination.
+                    </p>
+                    <div class="alert alert-warning py-2 small mb-3">
+                        <i class="fa fa-info-circle me-1"></i>
+                        Violation Count: <strong id="oes-violation-counter" class="text-danger fs-6">1</strong> (All events are logged and reported to the invigilator)
+                    </div>
+                    <button type="button" class="btn btn-primary px-4 py-2 fw-bold" onclick="document.getElementById('oes-focus-violation-modal').classList.add('d-none');">
+                        <i class="fa fa-check me-1"></i> Return to Examination
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -83,6 +136,156 @@
         </div>
     </footer>
 </div>
+
+<!-- Exam Lockdown & Anti-Cheat Protection Script -->
+<script>
+(function() {
+    'use strict';
+
+    let toastTimer = null;
+    let violationCount = 0;
+
+    function showSecurityAlert(message, isWarning) {
+        const toast = document.getElementById('oes-exam-security-toast');
+        const msgEl = document.getElementById('oes-toast-msg');
+        if (!toast || !msgEl) return;
+
+        msgEl.textContent = message;
+        toast.classList.remove('d-none');
+        toast.classList.add('oes-toast-visible');
+
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(function() {
+            toast.classList.remove('oes-toast-visible');
+            toast.classList.add('d-none');
+        }, 3500);
+    }
+
+    function recordViolation(reason) {
+        violationCount++;
+        
+        // Show the violation modal instead of instantly terminating
+        const modal = document.getElementById('oes-focus-violation-modal');
+        const counter = document.getElementById('oes-violation-counter');
+        
+        if (counter) {
+            counter.innerText = violationCount;
+        }
+        
+        if (modal) {
+            modal.classList.remove('d-none');
+        } else {
+            showSecurityAlert("Security Violation: " + reason);
+        }
+        
+        // Optional: If you want to force submit after 3 violations, you can add logic here:
+        // if (violationCount >= 3) { ... force submit ... }
+    }
+
+    // 1. Disable Right Click (Context Menu)
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        showSecurityAlert('Right-click context menu is disabled during the exam.');
+        return false;
+    });
+
+    // 2. Disable Copy, Cut, Paste
+    document.addEventListener('copy', function(e) {
+        e.preventDefault();
+        showSecurityAlert('Copying examination content is prohibited.');
+        return false;
+    });
+
+    document.addEventListener('cut', function(e) {
+        e.preventDefault();
+        showSecurityAlert('Cut action is disabled during the exam.');
+        return false;
+    });
+
+    document.addEventListener('paste', function(e) {
+        const target = e.target;
+        const isInput = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable);
+        // If it's outside input, block completely
+        if (!isInput) {
+            e.preventDefault();
+            showSecurityAlert('Pasting is prohibited.');
+            return false;
+        }
+    });
+
+    // 3. Disable Drag and Drop
+    document.addEventListener('dragstart', function(e) {
+        e.preventDefault();
+        return false;
+    });
+
+    // 4. Disable Screenshot & DevTools Keyboard Shortcuts
+    window.addEventListener('keydown', function(e) {
+        const isCtrl = e.ctrlKey || e.metaKey;
+        const key = e.key ? e.key.toLowerCase() : '';
+        const code = e.keyCode || e.which;
+
+        // PrintScreen Key (code 44)
+        if (e.key === 'PrintScreen' || code === 44) {
+            e.preventDefault();
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText('');
+            }
+            showSecurityAlert('Screenshot / PrintScreen capture is disabled.');
+            return false;
+        }
+
+        // F12 (Developer Tools)
+        if (code === 123) {
+            e.preventDefault();
+            showSecurityAlert('Developer Tools are disabled.');
+            return false;
+        }
+
+        // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C (DevTools inspect)
+        if (isCtrl && e.shiftKey && (key === 'i' || key === 'j' || key === 'c' || code === 73 || code === 74 || code === 67)) {
+            e.preventDefault();
+            showSecurityAlert('Developer Tools inspector is disabled.');
+            return false;
+        }
+
+        // Ctrl+U (View source), Ctrl+S (Save), Ctrl+P (Print)
+        if (isCtrl && (key === 'u' || key === 's' || key === 'p' || code === 85 || code === 83 || code === 80)) {
+            e.preventDefault();
+            showSecurityAlert('This keyboard shortcut is disabled during the exam.');
+            return false;
+        }
+
+        // Ctrl+C, Ctrl+X outside inputs
+        if (isCtrl && (key === 'c' || key === 'x' || code === 67 || code === 88)) {
+            const target = e.target;
+            const isInput = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA');
+            if (!isInput) {
+                e.preventDefault();
+                showSecurityAlert('Copy shortcut is disabled.');
+                return false;
+            }
+        }
+    });
+
+    // 5. Intercept PrintScreen KeyUp to wipe clipboard
+    window.addEventListener('keyup', function(e) {
+        if (e.key === 'PrintScreen' || e.keyCode === 44) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText('');
+            }
+            showSecurityAlert('Screenshot attempt detected & clipboard cleared.');
+        }
+    });
+
+    // 6. Window Blur & Tab Switching Detection Removed
+    // Safe Exam Browser handles this natively. Custom JS blur detection causes false positives when SEB initializes.
+
+})();
+</script>
+
+<!-- Question Navigation (Next Button Under Every Question) -->
+<script src="{{#wwwroot}}{{{ wwwroot }}}{{/wwwroot}}{{^wwwroot}}{{{ config.wwwroot }}}{{/wwwroot}}/theme/oes/javascript/exam_nav.js"></script>
 
 </body>
 </html>

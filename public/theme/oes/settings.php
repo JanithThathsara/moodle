@@ -50,8 +50,8 @@ if ($ADMIN->fulltree) {
     $name = 'theme_oes/lockdown_browser_url';
     $title = get_string('lockdown_browser_url', 'theme_oes');
     $description = get_string('lockdown_browser_url_desc', 'theme_oes');
-    $default = 'https://safeexambrowser.org/download_en.html';
-    $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_URL);
+    $default = '';
+    $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_RAW);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings->add($setting);
 

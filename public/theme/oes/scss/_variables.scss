@@ -1,49 +1,97 @@
 /* ==========================================================================
    OES THEME - VARIABLES & DESIGN TOKENS
    Mahapola Ports & Maritime Academy (MPMA / SLPA)
+   Balanced Card Proportions, High-Legibility Color Scheme & SaaS Architecture
    ========================================================================== */
 
-// --- Maritime Academy Color Palette ---
-$oes-navy-darker:     #001830;
-$oes-navy-dark:       #002244;
-$oes-navy-primary:    #002b49;
-$oes-navy-light:      #003b64;
+// --- Modern Clean Font Family Stack ---
+$oes-font-family:      'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !default;
 
-$oes-blue-ocean:      #005b8f;
-$oes-blue-accent:     #0076a8;
-$oes-blue-vibrant:    #00a3e0;
-$oes-blue-sky:        #38bdf8;
+// --- SLPA (Sri Lanka Ports Authority) Color Palette ---
+$oes-navy-darker:      #06162a; // Deepest navy for footers/dark sections
+$oes-navy-dark:        #0a2240; // SLPA Dark Blue
+$oes-navy-primary:     #004b87; // SLPA Ocean Blue
+$oes-navy-light:       #1c6ab0;
 
-$oes-ice-lightest:    #f8fbfe;
-$oes-ice-light:       #f4f8fb;
-$oes-ice-mid:         #e7f3fa;
-$oes-ice-border:      #d6e7f2;
+$oes-blue-ocean:       #005b8f;
+$oes-blue-accent:      #0076a8;
+$oes-blue-vibrant:     #00a3e0;
+$oes-blue-sky:         #38bdf8;
 
-$oes-gold-primary:    #f59e0b;
-$oes-gold-light:      #fef3c7;
-$oes-gold-dark:       #b45309;
+// SLPA Brand Accents
+$oes-slpa-red:         #e31837; // SLPA Logo Red
+$oes-slpa-red-light:   #ff4d66;
+$oes-gold-primary:     #ffb81c; // SLPA Logo Yellow/Gold
+$oes-gold-light:       #fff4d6;
+$oes-gold-dark:        #cc9000;
 
-$oes-success:         #107e54;
-$oes-success-bg:      #e8f8f0;
-$oes-danger:          #c02b2b;
-$oes-danger-bg:       #fdf0f0;
+// High-Contrast Semantic Recognition Colors
+$oes-status-active:    #059669; // Fresh Emerald Green
+$oes-status-active-bg: #ecfdf5;
+$oes-status-active-bd: #a7f3d0;
 
-$oes-text-main:       #0f172a;
-$oes-text-muted:      #475569;
-$oes-text-subtle:     #64748b;
+$oes-status-info:      #0284c7; // Vibrant Cyan Blue
+$oes-status-info-bg:   #f0f9ff;
+$oes-status-info-bd:   #bae6fd;
+
+$oes-status-warning:   #d97706; // Warm Amber Gold
+$oes-status-warning-bg:#fffbeb;
+$oes-status-warning-bd:#fde68a;
+
+$oes-status-danger:    #e11d48; // Crisp Rose Red
+$oes-status-danger-bg: #fff1f2;
+$oes-status-danger-bd: #fecdd3;
+
+$oes-status-indigo:    #4f46e5; // Royal Indigo
+$oes-status-indigo-bg: #eef2ff;
+$oes-status-indigo-bd: #c7d2fe;
+
+// Neutral Canvas & Surface Shades
+$oes-ice-lightest:     #f8fbfe;
+$oes-ice-light:        #f4f8fb;
+$oes-ice-mid:          #e7f3fa;
+$oes-ice-border:       #d6e7f2;
+$oes-surface-white:    #ffffff;
+$oes-surface-border:   #e2e8f0;
+
+$oes-success:          $oes-status-active;
+$oes-success-bg:       $oes-status-active-bg;
+$oes-danger:           $oes-status-danger;
+$oes-danger-bg:        $oes-status-danger-bg;
+
+$oes-text-main:        #0f172a; // Deep slate black for 100% crisp legibility
+$oes-text-body:        #334155; // High-contrast slate body text
+$oes-text-muted:       #475569;
+$oes-text-subtle:      #64748b;
 
 // --- Shadows & Elevations ---
-$oes-shadow-sm:       0 2px 8px rgba(0, 34, 68, 0.06);
-$oes-shadow-md:       0 8px 24px rgba(0, 34, 68, 0.09);
-$oes-shadow-lg:       0 16px 40px rgba(0, 34, 68, 0.14);
-$oes-shadow-hover:    0 20px 48px rgba(0, 34, 68, 0.18);
+$oes-shadow-xs:        0 1px 4px rgba(10, 34, 64, 0.04);
+$oes-shadow-sm:        0 2px 8px rgba(10, 34, 64, 0.06);
+$oes-shadow-md:        0 6px 20px rgba(10, 34, 64, 0.08);
+$oes-shadow-lg:        0 14px 34px rgba(10, 34, 64, 0.12);
+$oes-shadow-hover:     0 18px 42px rgba(10, 34, 64, 0.16);
 
 // --- Border Radius Tokens ---
-$oes-radius-sm:       8px;
-$oes-radius-md:       14px;
-$oes-radius-lg:       20px;
-$oes-radius-pill:     9999px;
+$oes-radius-xs:        6px;
+$oes-radius-sm:        10px;
+$oes-radius-md:        14px;
+$oes-radius-lg:        20px;
+$oes-radius-xl:        26px;
+$oes-radius-pill:      9999px;
+
+// --- Card Dimensional Tokens for Perfect Aspect Ratio & Balance ---
+$oes-card-min-width:   300px;
+$oes-card-max-width:   385px; // Prevents cards from blowing up into wide banners
+$oes-card-img-height:  180px;
+$oes-card-title-height:2.85em; // Standard 2-line title height
+$oes-card-min-height:  420px;
+
+// --- Admin Interface Tokens ---
+$oes-admin-sidebar-bg: #0a2240;
+$oes-admin-card-bg:    #ffffff;
+$oes-admin-header-bg:  #002b49;
+$oes-admin-border:     #e2e8f0;
 
 // --- Transitions ---
-$oes-transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-$oes-transition-med:  all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$oes-transition-fast:  all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+$oes-transition-med:   all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

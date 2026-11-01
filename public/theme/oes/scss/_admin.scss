@@ -1,0 +1,533 @@
+/* ==========================================================================
+   OES THEME - ADMINISTRATOR INTERFACE STYLING
+   State-of-the-art SaaS admin portal experience with clear, high-contrast,
+   user-friendly layouts, modern settings cards, sleek data tables, and management consoles.
+   ========================================================================== */
+
+// --- Admin Page Canvas Enhancements ---
+.pagelayout-admin,
+.pagelayout-report {
+    #page.drawers .main-inner {
+        background-color: #ffffff !important;
+        border: 1px solid $oes-surface-border !important;
+        border-radius: $oes-radius-xl !important;
+        box-shadow: $oes-shadow-md !important;
+        padding: 2.25rem 2.5rem !important;
+
+        @media (max-width: 767px) {
+            padding: 1.25rem 1rem !important;
+            border-radius: $oes-radius-md !important;
+        }
+    }
+}
+
+// --- Admin Top Search Spotlight Bar ---
+.adminsearchform {
+    max-width: 720px;
+    margin: 1.5rem auto 2.5rem !important;
+    position: relative;
+
+    .form-group,
+    .d-flex {
+        display: flex !important;
+        align-items: center !important;
+        background: #ffffff !important;
+        border: 2px solid #cbd5e1 !important;
+        border-radius: 50px !important;
+        padding: 4px 6px 4px 18px !important;
+        box-shadow: 0 4px 20px rgba(0, 43, 73, 0.08) !important;
+        transition: $oes-transition-fast !important;
+
+        &:focus-within {
+            border-color: $oes-navy-primary !important;
+            box-shadow: 0 0 0 4px rgba(0, 75, 135, 0.18) !important;
+        }
+
+        &::before {
+            content: "\f002";
+            font-family: "FontAwesome";
+            color: $oes-navy-primary;
+            font-size: 1.1rem;
+            margin-right: 10px;
+        }
+
+        input[type="text"],
+        #adminsearchquery {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            font-size: 1rem !important;
+            color: $oes-text-main !important;
+            background: transparent !important;
+            padding: 8px 12px !important;
+            width: 100% !important;
+
+            &::placeholder {
+                color: #94a3b8 !important;
+            }
+        }
+
+        button,
+        input[type="submit"] {
+            background: linear-gradient(135deg, $oes-navy-dark 0%, $oes-navy-primary 100%) !important;
+            border: none !important;
+            border-radius: 50px !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            font-size: 0.92rem !important;
+            padding: 8px 22px !important;
+            box-shadow: 0 2px 8px rgba(0, 43, 73, 0.2) !important;
+            transition: $oes-transition-fast !important;
+            flex-shrink: 0 !important;
+
+            &:hover {
+                background: linear-gradient(135deg, $oes-navy-primary 0%, $oes-blue-ocean 100%) !important;
+                transform: translateY(-1px);
+            }
+        }
+    }
+}
+
+// --- Admin Category Navigation Tabs (General, Users, Courses, Grades, etc.) ---
+.admin-tab-nav,
+.nav.nav-tabs.admin-tabs,
+.pagelayout-admin .secondary-navigation .nav-tabs {
+    background: #f1f5f9 !important;
+    border-radius: 16px !important;
+    padding: 6px !important;
+    border: 1px solid #e2e8f0 !important;
+    display: flex !important;
+    gap: 4px !important;
+    flex-wrap: wrap !important;
+    margin-bottom: 2rem !important;
+
+    .nav-item {
+        margin: 0 !important;
+
+        .nav-link {
+            border: none !important;
+            border-radius: 12px !important;
+            font-weight: 700 !important;
+            font-size: 0.92rem !important;
+            color: $oes-navy-dark !important;
+            padding: 8px 16px !important;
+            background: transparent !important;
+            transition: $oes-transition-fast !important;
+
+            &:hover {
+                background: #ffffff !important;
+                color: $oes-navy-primary !important;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+            }
+
+            &.active {
+                background: linear-gradient(135deg, $oes-navy-dark 0%, $oes-navy-primary 100%) !important;
+                color: #ffffff !important;
+                box-shadow: 0 4px 12px rgba(0, 43, 73, 0.25) !important;
+            }
+        }
+    }
+}
+
+// --- Site Administration Category Hub (Cards Grid) ---
+.admin_category {
+    margin-bottom: 2rem;
+
+    h3, .category-name {
+        font-size: 1.35rem !important;
+        font-weight: 800 !important;
+        color: $oes-navy-dark !important;
+        border-bottom: 2px solid $oes-ice-mid !important;
+        padding-bottom: 0.75rem !important;
+        margin-bottom: 1.25rem !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.6rem !important;
+
+        &::before {
+            content: "\f085";
+            font-family: "FontAwesome";
+            color: $oes-navy-primary;
+            font-size: 1.15rem;
+        }
+    }
+
+    ul.admin_category_links,
+    ul.admin_links {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+        gap: 12px !important;
+        list-style: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+
+        li {
+            margin: 0 !important;
+            padding: 0 !important;
+
+            a {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                background: #f8fbfe !important;
+                border: 1px solid #e2eef6 !important;
+                border-radius: 12px !important;
+                padding: 12px 16px !important;
+                color: $oes-navy-dark !important;
+                font-weight: 600 !important;
+                font-size: 0.95rem !important;
+                text-decoration: none !important;
+                transition: $oes-transition-fast !important;
+
+                &::after {
+                    content: "\f054";
+                    font-family: "FontAwesome";
+                    color: #94a3b8;
+                    font-size: 0.75rem;
+                    transition: transform 0.2s ease;
+                }
+
+                &:hover {
+                    background: #ffffff !important;
+                    border-color: $oes-navy-primary !important;
+                    color: $oes-navy-primary !important;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 14px rgba(0, 75, 135, 0.1) !important;
+
+                    &::after {
+                        color: $oes-navy-primary;
+                        transform: translateX(3px);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// --- Admin Settings Forms (Clean Card Fieldsets) ---
+.settingsform,
+.mform {
+    fieldset.collapsible,
+    fieldset {
+        background: #ffffff !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: $oes-radius-lg !important;
+        padding: 1.75rem 2rem !important;
+        margin-bottom: 2rem !important;
+        box-shadow: $oes-shadow-sm !important;
+        transition: $oes-transition-fast !important;
+
+        &:hover {
+            box-shadow: $oes-shadow-md !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        legend {
+            font-size: 1.25rem !important;
+            font-weight: 800 !important;
+            color: $oes-navy-dark !important;
+            padding: 0 0.5rem !important;
+            margin-bottom: 1.25rem !important;
+            width: auto !important;
+            border: none !important;
+
+            a {
+                color: inherit !important;
+                text-decoration: none !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 0.5rem !important;
+            }
+        }
+    }
+
+    // Form Rows & Controls
+    .form-item,
+    .form-group.row {
+        margin-bottom: 1.25rem !important;
+        align-items: center !important;
+
+        .col-form-label {
+            font-weight: 700 !important;
+            color: #1e293b !important;
+            font-size: 0.95rem !important;
+        }
+
+        .form-control,
+        select,
+        .custom-select {
+            border: 1.5px solid #cbd5e1 !important;
+            border-radius: 10px !important;
+            padding: 0.65rem 0.95rem !important;
+            font-size: 0.95rem !important;
+            color: #0f172a !important;
+            background-color: #ffffff !important;
+            transition: $oes-transition-fast !important;
+
+            &:focus {
+                border-color: $oes-blue-accent !important;
+                box-shadow: 0 0 0 3px rgba(0, 118, 168, 0.15) !important;
+                background-color: #ffffff !important;
+            }
+        }
+
+        .form-defaultinfo,
+        .form-description,
+        small.text-muted {
+            font-size: 0.85rem !important;
+            color: #64748b !important;
+            margin-top: 0.35rem !important;
+            display: block !important;
+            line-height: 1.5 !important;
+        }
+    }
+
+    // Prominent "Save Changes" Button
+    #id_submitbutton,
+    input[type="submit"].btn-primary,
+    button[type="submit"].btn-primary {
+        background: linear-gradient(135deg, $oes-navy-dark 0%, $oes-navy-primary 100%) !important;
+        border: none !important;
+        border-radius: 12px !important;
+        padding: 11px 28px !important;
+        font-weight: 700 !important;
+        font-size: 1rem !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 14px rgba(0, 43, 73, 0.25) !important;
+        transition: $oes-transition-fast !important;
+        cursor: pointer !important;
+
+        &:hover {
+            background: linear-gradient(135deg, $oes-navy-primary 0%, $oes-blue-ocean 100%) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 43, 73, 0.35) !important;
+        }
+    }
+
+    .btn-secondary {
+        border-radius: 12px !important;
+        padding: 10px 22px !important;
+        font-weight: 600 !important;
+        border: 1.5px solid #cbd5e1 !important;
+        background: #ffffff !important;
+        color: #475569 !important;
+        transition: $oes-transition-fast !important;
+
+        &:hover {
+            background: #f1f5f9 !important;
+            border-color: #94a3b8 !important;
+            color: #0f172a !important;
+        }
+    }
+}
+
+// --- Admin Data Tables & Reports (State-of-the-art Polished Tables) ---
+.generaltable,
+.admintable,
+.userenrolment,
+.flexible {
+    width: 100% !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    border: 1px solid #dce8f2 !important;
+    background: #ffffff !important;
+    box-shadow: 0 4px 20px rgba(0, 34, 68, 0.05) !important;
+    margin-bottom: 2rem !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+
+    thead th {
+        background: linear-gradient(135deg, #0a2240 0%, #004b87 100%) !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        font-size: 0.88rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.6px !important;
+        padding: 15px 18px !important;
+        border: none !important;
+
+        a {
+            color: #ffffff !important;
+            text-decoration: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.4rem !important;
+
+            &:hover {
+                color: $oes-gold-primary !important;
+            }
+        }
+    }
+
+    tbody tr {
+        transition: background-color 0.18s ease;
+
+        &:nth-child(even) {
+            background-color: #fbfdff !important;
+        }
+
+        &:hover {
+            background-color: #f0f7fc !important;
+        }
+
+        td {
+            padding: 14px 18px !important;
+            border-top: 1px solid #f1f5f9 !important;
+            border-bottom: none !important;
+            color: #1e293b !important;
+            font-size: 0.94rem !important;
+            vertical-align: middle !important;
+        }
+    }
+
+    // Modern Circular Action Buttons in Admin Tables (Edit, Delete, Suspend)
+    .action-icon,
+    a.btn-icon,
+    .quickeditlink {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 32px !important;
+        height: 32px !important;
+        border-radius: 8px !important;
+        background: #f1f5f9 !important;
+        color: $oes-navy-primary !important;
+        text-decoration: none !important;
+        margin: 0 2px !important;
+        transition: $oes-transition-fast !important;
+
+        &:hover {
+            background: $oes-navy-primary !important;
+            color: #ffffff !important;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 6px rgba(0, 43, 73, 0.2) !important;
+        }
+
+        i {
+            font-size: 0.85rem !important;
+        }
+    }
+}
+
+// --- Semantic Badges in Admin Tables ---
+.badge {
+    font-weight: 700 !important;
+    padding: 5px 10px !important;
+    border-radius: 50px !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.4px !important;
+
+    &.badge-success,
+    &.bg-success {
+        background-color: $oes-status-active-bg !important;
+        color: #065f46 !important;
+        border: 1px solid $oes-status-active-bd !important;
+    }
+
+    &.badge-warning,
+    &.bg-warning {
+        background-color: $oes-status-warning-bg !important;
+        color: #92400e !important;
+        border: 1px solid $oes-status-warning-bd !important;
+    }
+
+    &.badge-danger,
+    &.bg-danger {
+        background-color: $oes-status-danger-bg !important;
+        color: #9f1239 !important;
+        border: 1px solid $oes-status-danger-bd !important;
+    }
+
+    &.badge-info,
+    &.bg-info {
+        background-color: $oes-status-info-bg !important;
+        color: #0369a1 !important;
+        border: 1px solid $oes-status-info-bd !important;
+    }
+}
+
+// --- Course & Category Management Console (/course/management.php) ---
+.category-listing,
+.course-listing,
+.course-detail {
+    background: #ffffff !important;
+    border: 1px solid #dce8f2 !important;
+    border-radius: $oes-radius-lg !important;
+    padding: 1.5rem !important;
+    box-shadow: $oes-shadow-sm !important;
+    margin-bottom: 1.5rem !important;
+
+    h3, .card-title {
+        font-size: 1.25rem !important;
+        font-weight: 800 !important;
+        color: $oes-navy-dark !important;
+        border-bottom: 2px solid $oes-ice-mid !important;
+        padding-bottom: 0.75rem !important;
+        margin-bottom: 1.25rem !important;
+    }
+
+    .listing-actions {
+        display: flex !important;
+        gap: 0.5rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    ul.ml {
+        list-style: none !important;
+        padding-left: 0 !important;
+
+        li.listitem {
+            border-radius: 10px !important;
+            padding: 8px 12px !important;
+            margin-bottom: 6px !important;
+            transition: $oes-transition-fast !important;
+
+            &:hover {
+                background: #f0f7fc !important;
+            }
+
+            &[data-selected="1"] {
+                background: #e0f2fe !important;
+                font-weight: 700 !important;
+            }
+        }
+    }
+}
+
+// --- Modern Pagination Controls ---
+.pagination {
+    display: flex !important;
+    gap: 4px !important;
+    justify-content: center !important;
+    margin: 2rem 0 !important;
+
+    .page-item {
+        .page-link {
+            border-radius: 10px !important;
+            border: 1px solid #cbd5e1 !important;
+            color: $oes-navy-primary !important;
+            font-weight: 700 !important;
+            font-size: 0.92rem !important;
+            padding: 8px 14px !important;
+            transition: $oes-transition-fast !important;
+
+            &:hover {
+                background: #f0f7fc !important;
+                border-color: $oes-navy-primary !important;
+            }
+        }
+
+        &.active .page-link {
+            background: linear-gradient(135deg, $oes-navy-dark 0%, $oes-navy-primary 100%) !important;
+            color: #ffffff !important;
+            border-color: transparent !important;
+            box-shadow: 0 4px 10px rgba(0, 43, 73, 0.25) !important;
+        }
+
+        &.disabled .page-link {
+            color: #94a3b8 !important;
+            background: #f8fafc !important;
+            border-color: #e2e8f0 !important;
+        }
+    }
+}

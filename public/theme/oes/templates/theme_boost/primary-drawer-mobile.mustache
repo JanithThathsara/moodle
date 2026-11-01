@@ -42,8 +42,8 @@
         <!-- Mobile Lockdown Browser action -->
         <div class="p-3 bg-light border-bottom">
             <a href="{{#lockdown_url}}{{{lockdown_url}}}{{/lockdown_url}}{{^lockdown_url}}https://safeexambrowser.org/download_en.html{{/lockdown_url}}"
-               target="_blank"
-               rel="noopener noreferrer"
+               {{#is_local_download}}download="{{#local_installer_name}}{{{local_installer_name}}}{{/local_installer_name}}{{^local_installer_name}}SEB_Setup.exe{{/local_installer_name}}"{{/is_local_download}}
+               {{^is_local_download}}target="_blank" rel="noopener noreferrer"{{/is_local_download}}
                class="btn btn-warning w-100 fw-bold d-flex align-items-center justify-content-center gap-2 text-dark shadow-sm">
                 <i class="fa fa-shield-alt"></i>
                 <span>{{#str}}lockdown_browser, theme_oes{{/str}}</span>

@@ -45,11 +45,19 @@ function theme_oes_get_pre_scss($theme) {
     $scss .= "\$danger: #c02b2b !default;\n";
     $scss .= "\$light: #f4f8fb !default;\n";
     $scss .= "\$body-bg: #f4f8fb !default;\n";
-    $scss .= "\$body-color: #1a2a3a !default;\n";
+    $scss .= "\$body-color: #0f172a !default;\n";
+    $scss .= "\$font-size-base: 1.05rem !default;\n";
+    $scss .= "\$font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;\n";
+    $scss .= "\$headings-font-weight: 800 !default;\n";
+    $scss .= "\$headings-color: #002244 !default;\n";
+    $scss .= "\$h1-font-size: 2.45rem !default;\n";
+    $scss .= "\$h2-font-size: 2.0rem !default;\n";
+    $scss .= "\$h3-font-size: 1.6rem !default;\n";
+    $scss .= "\$h4-font-size: 1.3rem !default;\n";
     $scss .= "\$link-color: #005b8f !default;\n";
     $scss .= "\$link-hover-color: #00385c !default;\n";
     $scss .= "\$course-content-maxwidth: 1400px !default;\n";
-    $scss .= "\$navbar-height: 68px !default;\n";
+    $scss .= "\$navbar-height: 80px !default;\n";
 
     if (!empty($theme->settings->scsspre)) {
         $scss .= "\n" . $theme->settings->scsspre . "\n";
@@ -79,11 +87,15 @@ function theme_oes_get_extra_scss($theme) {
         'secure',
         'results',
         'login',
+        'admin',
         'footer',
     ];
 
     foreach ($modules as $module) {
-        $file = $CFG->dirroot . '/theme/oes/scss/_' . $module . '.scss';
+        $file = __DIR__ . '/scss/_' . $module . '.scss';
+        if (!file_exists($file)) {
+            $file = $CFG->dirroot . '/theme/oes/scss/_' . $module . '.scss';
+        }
         if (file_exists($file)) {
             $content .= "\n/* --- OES " . strtoupper($module) . " --- */\n";
             $content .= file_get_contents($file);
@@ -131,4 +143,26 @@ function theme_oes_user_preferences(): array {
             'permissioncallback' => [core_user::class, 'is_current_user'],
         ],
     ];
+}
+
+/**
+ * Page initialization callback for theme_oes.
+ * Automatically loads the question navigation script (Next button under every question)
+ * on all quiz attempt and review pages.
+ *
+ * @param moodle_page $page
+ */
+function theme_oes_page_init(moodle_page $page) {
+    // Detect if current page is quiz attempt, preview, or review
+    $isquiz = false;
+    if (!empty($page->pagetype) && strpos($page->pagetype, 'mod-quiz') !== false) {
+        $isquiz = true;
+    }
+    if (!empty($page->activityname) && $page->activityname === 'quiz') {
+        $isquiz = true;
+    }
+
+    if ($isquiz) {
+        $page->requires->js(new moodle_url('/theme/oes/javascript/exam_nav.js'));
+    }
 }

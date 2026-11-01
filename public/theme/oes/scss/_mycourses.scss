@@ -1,7 +1,7 @@
 /* ==========================================================================
    OES THEME - COURSES & EXAMS CARD GRID ALIGNMENT
    Guarantees equal heights, uniform image ratios, clamped titles,
-   and pinned bottom action buttons.
+   balanced card width/height proportions, and pinned action buttons.
    ========================================================================== */
 
 // --- Main Grid Container for Course / Exam Overview ---
@@ -18,13 +18,14 @@
         grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)) !important;
         gap: 24px !important;
         margin: 0 !important;
-        padding: 10px 0 30px !important;
+        padding: 10px 0 35px !important;
+        justify-content: start !important;
 
-        // Reset bootstrap col constraints
+        // Reset bootstrap col constraints to prevent awkward stretching
         > [class*="col"] {
             width: 100% !important;
-            max-width: none !important;
-            flex: none !important;
+            max-width: 390px !important;
+            flex: 1 1 310px !important;
             margin: 0 !important;
             padding: 0 !important;
             display: flex !important;
@@ -38,12 +39,14 @@
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
+    max-width: 390px !important; // Keeps cards balanced when fewer items exist
     height: 100% !important;
+    min-height: 430px !important;
     background: #ffffff !important;
     border: 1px solid #dce8f2 !important;
-    border-radius: 20px !important;
+    border-radius: $oes-radius-lg !important;
     overflow: hidden !important;
-    box-shadow: 0 4px 18px rgba(0, 34, 68, 0.06) !important;
+    box-shadow: $oes-shadow-sm !important;
     position: relative !important;
     transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
                 box-shadow 0.28s ease,
@@ -51,21 +54,21 @@
 
     &:hover {
         transform: translateY(-6px) !important;
-        border-color: #0076a8 !important;
-        box-shadow: 0 16px 36px rgba(0, 34, 68, 0.13) !important;
+        border-color: $oes-navy-primary !important;
+        box-shadow: $oes-shadow-lg !important;
 
         .card-img-top,
         .oes-card-img {
-            transform: scale(1.04);
+            transform: scale(1.05);
         }
 
         .oes-title-link,
         .coursename {
-            color: #0076a8 !important;
+            color: $oes-navy-primary !important;
         }
     }
 
-    // Media & Image Area
+    // Media & Image Area (Standard 180px 16:9 ratio)
     .oes-card-media-wrapper,
     a[tabindex="-1"] {
         display: block !important;
@@ -74,7 +77,7 @@
         height: 180px !important;
         min-height: 180px !important;
         max-height: 180px !important;
-        background: linear-gradient(135deg, #001b33 0%, #002b49 60%, #005b8f 100%) !important;
+        background: linear-gradient(135deg, $oes-navy-darker 0%, $oes-navy-dark 55%, $oes-navy-primary 100%) !important;
     }
 
     .card-img-top,
@@ -86,7 +89,17 @@
         background-size: cover !important;
         background-position: center !important;
         border-radius: 0 !important;
-        transition: transform 0.4s ease !important;
+        transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    .oes-card-img-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, rgba(6, 22, 42, 0.4) 0%, rgba(6, 22, 42, 0.05) 50%, rgba(6, 22, 42, 0.6) 100%);
+        pointer-events: none;
     }
 
     // Badges on image
@@ -94,16 +107,17 @@
         z-index: 2;
 
         .oes-badge-exam {
-            background: rgba(0, 24, 48, 0.88) !important;
-            backdrop-filter: blur(4px);
-            color: #38bdf8 !important;
-            border: 1px solid rgba(56, 189, 248, 0.35) !important;
+            background: rgba(6, 22, 42, 0.9) !important;
+            backdrop-filter: blur(6px);
+            color: $oes-gold-primary !important;
+            border: 1px solid rgba(255, 184, 28, 0.45) !important;
             border-radius: 50px !important;
-            font-size: 10px !important;
+            font-size: 10.5px !important;
             font-weight: 800 !important;
-            letter-spacing: 0.6px !important;
-            padding: 5px 11px !important;
+            letter-spacing: 0.7px !important;
+            padding: 6px 12px !important;
             text-transform: uppercase !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
         }
     }
 
@@ -111,8 +125,8 @@
         z-index: 2;
 
         .btn {
-            background: rgba(0, 24, 48, 0.6) !important;
-            backdrop-filter: blur(4px);
+            background: rgba(6, 22, 42, 0.7) !important;
+            backdrop-filter: blur(6px);
             color: #ffffff !important;
             border-radius: 50% !important;
             width: 32px !important;
@@ -121,11 +135,13 @@
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            border: none !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            transition: $oes-transition-fast;
 
             &:hover {
-                background: #002b49 !important;
-                color: #38bdf8 !important;
+                background: $oes-navy-primary !important;
+                color: $oes-gold-primary !important;
+                border-color: $oes-gold-primary !important;
             }
         }
     }
@@ -136,22 +152,28 @@
         display: flex !important;
         flex-direction: column !important;
         flex: 1 1 auto !important;
-        padding: 22px !important;
+        padding: 20px 22px !important;
         background: #ffffff !important;
 
         .oes-card-meta {
             display: flex !important;
             align-items: center !important;
             justify-content: space-between !important;
-            margin-bottom: 0.5rem !important;
+            gap: 8px !important;
+            margin-bottom: 0.65rem !important;
+            min-height: 24px !important;
 
             .oes-card-category,
             .categoryname {
-                font-size: 0.78rem !important;
+                font-size: 0.76rem !important;
                 font-weight: 800 !important;
-                color: #0076a8 !important;
+                color: $oes-navy-primary !important;
                 text-transform: uppercase !important;
-                letter-spacing: 0.6px !important;
+                letter-spacing: 0.8px !important;
+                background: #f0f7fc !important;
+                padding: 3px 8px !important;
+                border-radius: 6px !important;
+                border: 1px solid #ddecfa !important;
             }
 
             .oes-shortname-badge {
@@ -161,31 +183,36 @@
                 color: #475569 !important;
                 border: 1px solid #e2e8f0 !important;
                 border-radius: 6px !important;
-                padding: 3px 7px !important;
+                padding: 3px 8px !important;
             }
         }
 
-        // Standardized Clamped Title
+        // Standardized Clamped Title (Identical 2.85em height on all cards)
         .oes-card-title,
         .coursename {
-            font-size: 1.15rem !important;
+            font-size: 1.12rem !important;
             font-weight: 700 !important;
             line-height: 1.4 !important;
-            color: #002244 !important;
-            margin-bottom: 0.5rem !important;
+            color: $oes-navy-dark !important;
+            margin-bottom: 0.75rem !important;
             text-decoration: none !important;
 
-            // Strict 2-line clamp with uniform height
             display: -webkit-box !important;
             -webkit-line-clamp: 2 !important;
             -webkit-box-orient: vertical !important;
             overflow: hidden !important;
-            min-height: 2.8em !important;
-            max-height: 2.8em !important;
+            height: 2.85em !important;
+            min-height: 2.85em !important;
+            max-height: 2.85em !important;
 
             a {
                 color: inherit !important;
                 text-decoration: none !important;
+                transition: color 0.2s ease !important;
+
+                &:hover {
+                    color: $oes-blue-ocean !important;
+                }
             }
         }
 
@@ -193,6 +220,7 @@
         .oes-card-progress {
             margin-top: auto !important;
             padding-top: 0.5rem !important;
+            margin-bottom: 0.5rem !important;
 
             .progress {
                 height: 6px !important;
@@ -200,7 +228,7 @@
                 background-color: #e2e8f0 !important;
 
                 .progress-bar {
-                    background: linear-gradient(90deg, #0076a8 0%, #00a3e0 100%) !important;
+                    background: linear-gradient(90deg, $oes-navy-primary 0%, $oes-blue-accent 100%) !important;
                 }
             }
         }
@@ -215,7 +243,7 @@
             .oes-btn-enter-exam,
             .btn-primary {
                 height: 44px !important;
-                background: linear-gradient(135deg, #002b49 0%, #005b8f 100%) !important;
+                background: linear-gradient(135deg, $oes-navy-dark 0%, $oes-navy-primary 100%) !important;
                 border: none !important;
                 border-radius: 12px !important;
                 font-weight: 700 !important;
@@ -224,15 +252,15 @@
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
-                gap: 0.5rem !important;
-                box-shadow: 0 4px 12px rgba(0, 43, 73, 0.15) !important;
+                gap: 0.6rem !important;
+                box-shadow: 0 4px 12px rgba(6, 22, 42, 0.15) !important;
                 transition: all 0.25s ease !important;
                 text-decoration: none !important;
 
                 &:hover {
-                    background: linear-gradient(135deg, #003b64 0%, #0076a8 100%) !important;
+                    background: linear-gradient(135deg, $oes-navy-primary 0%, $oes-blue-ocean 100%) !important;
                     transform: translateY(-2px) !important;
-                    box-shadow: 0 8px 20px rgba(0, 43, 73, 0.25) !important;
+                    box-shadow: 0 8px 20px rgba(0, 118, 168, 0.3) !important;
                     color: #ffffff !important;
                 }
             }
@@ -244,30 +272,37 @@
 .block_myoverview [data-region="filter"] {
     background: #ffffff !important;
     border: 1px solid #dce8f2 !important;
-    border-radius: 16px !important;
+    border-radius: $oes-radius-md !important;
     padding: 12px 18px !important;
-    margin-bottom: 1.5rem !important;
-    box-shadow: 0 2px 10px rgba(0, 34, 68, 0.04) !important;
+    margin-bottom: 1.75rem !important;
+    box-shadow: $oes-shadow-xs !important;
 
     .dropdown-toggle {
         border-radius: 10px !important;
-        border: 1px solid #cbd5e1 !important;
+        border: 1.5px solid #cbd5e1 !important;
         font-weight: 600 !important;
         font-size: 0.88rem !important;
-        color: #002b49 !important;
+        color: $oes-navy-primary !important;
         background: #f8fafc !important;
-        padding: 6px 14px !important;
+        padding: 7px 16px !important;
+        transition: $oes-transition-fast;
 
         &:hover {
             background: #ffffff !important;
-            border-color: #0076a8 !important;
+            border-color: $oes-navy-primary !important;
         }
     }
 
     .form-control {
         border-radius: 10px !important;
-        border: 1px solid #cbd5e1 !important;
+        border: 1.5px solid #cbd5e1 !important;
         font-size: 0.88rem !important;
+        padding: 7px 14px !important;
+
+        &:focus {
+            border-color: $oes-blue-accent !important;
+            box-shadow: 0 0 0 3px rgba(0, 118, 168, 0.15) !important;
+        }
     }
 }
 
@@ -275,21 +310,26 @@
 .coursebox {
     background: #ffffff !important;
     border: 1px solid #dce8f2 !important;
-    border-radius: 16px !important;
+    border-radius: $oes-radius-md !important;
     padding: 1.25rem 1.5rem !important;
     margin-bottom: 1.25rem !important;
-    box-shadow: 0 2px 8px rgba(0, 34, 68, 0.04) !important;
-    transition: all 0.25s ease !important;
+    box-shadow: $oes-shadow-xs !important;
+    transition: $oes-transition-fast !important;
 
     &:hover {
-        border-color: #0076a8 !important;
-        box-shadow: 0 8px 24px rgba(0, 34, 68, 0.1) !important;
-        transform: translateY(-3px) !important;
+        border-color: $oes-navy-primary !important;
+        box-shadow: $oes-shadow-md !important;
+        transform: translateY(-2px) !important;
     }
 
     .coursename a {
-        color: #002244 !important;
+        color: $oes-navy-dark !important;
         font-weight: 700 !important;
         font-size: 1.15rem !important;
+        text-decoration: none !important;
+
+        &:hover {
+            color: $oes-blue-ocean !important;
+        }
     }
 }

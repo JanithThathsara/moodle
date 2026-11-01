@@ -16,8 +16,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2026100100;
-$plugin->requires  = 2026041000;
+$plugin->version   = 2026102201;
+$plugin->requires  = 2024100700;
 $plugin->component = 'theme_oes';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = 'v1.0.0';
+$plugin->release   = 'v1.0.1';

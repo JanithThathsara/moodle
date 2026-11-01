@@ -44,6 +44,15 @@ $hasblocks = (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbu
 if (!$hasblocks) {
     $blockdraweropen = false;
 }
+
+$forceblockdraweropen = false;
+if (strpos($PAGE->pagetype, 'mod-quiz-attempt') !== false || strpos($PAGE->pagetype, 'mod-quiz-review') !== false) {
+    if ($hasblocks) {
+        $forceblockdraweropen = true;
+        $blockdraweropen = true;
+    }
+    $PAGE->requires->js(new moodle_url('/theme/oes/javascript/exam_nav.js'));
+}
 $courseindex = core_course_drawer();
 if (!$courseindex) {
     $courseindexopen = false;
@@ -87,9 +96,35 @@ $coursefullname = ($PAGE->course?->fullname) ? format_string(
 $courseurl = $PAGE->course ? new \core\url('/course/view.php', ['id' => $PAGE->course->id]) : null;
 
 $lockdownurl = get_config('theme_oes', 'lockdown_browser_url');
-if (empty($lockdownurl)) {
-    $lockdownurl = 'https://safeexambrowser.org/download_en.html';
+$islocaldownload = false;
+$localfilename = 'SEB_Setup.exe';
+
+// Check if local installer exists in Moodle public/downloads or downloads folder.
+$haslocalfile = false;
+if (file_exists($CFG->dirroot . '/downloads/' . $localfilename)) {
+    $haslocalfile = true;
+} else if (file_exists($CFG->dirroot . '/public/downloads/' . $localfilename)) {
+    $haslocalfile = true;
+} else if (file_exists(dirname($CFG->dirroot) . '/public/downloads/' . $localfilename)) {
+    $haslocalfile = true;
 }
+
+if ($haslocalfile) {
+    // ALWAYS prioritize local offline installer when file exists on localhost/server!
+    $lockdownurl = $CFG->wwwroot . '/downloads/' . $localfilename;
+    $islocaldownload = true;
+} else if (empty($lockdownurl) || strpos($lockdownurl, 'safeexambrowser.org') !== false) {
+    $lockdownurl = $CFG->wwwroot . '/downloads/' . $localfilename;
+    $islocaldownload = true;
+} else {
+    if (strpos($lockdownurl, '/') === 0) {
+        $lockdownurl = $CFG->wwwroot . $lockdownurl;
+        $islocaldownload = true;
+    } else if (strpos($lockdownurl, $CFG->wwwroot) !== false || preg_match('/\.(exe|msi|zip)$/i', $lockdownurl)) {
+        $islocaldownload = true;
+    }
+}
+
 $lockdownshow = get_config('theme_oes', 'lockdown_browser_show');
 $showlockdown = ($lockdownshow !== '0' && $lockdownshow !== 0);
 
@@ -117,6 +152,8 @@ $templatecontext = [
     'addblockbutton' => $addblockbutton,
     'lockdown_url' => $lockdownurl,
     'lockdown_show' => $showlockdown,
+    'is_local_download' => $islocaldownload,
+    'local_installer_name' => $localfilename,
 ];
 
 echo $OUTPUT->render_from_template('theme_boost/drawers', $templatecontext);

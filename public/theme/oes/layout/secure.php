@@ -21,8 +21,15 @@ $blockshtml = $OUTPUT->blocks('side-pre');
 $hasblocks = strpos($blockshtml, 'data-block=') !== false;
 $bodyattributes = $OUTPUT->body_attributes(['pagelayout-secure', 'oes-secure-exam-mode']);
 
+global $USER;
+$candidate_name = isloggedin() ? fullname($USER) : 'Candidate';
+$candidate_id = isloggedin() ? (!empty($USER->idnumber) ? $USER->idnumber : $USER->username) : 'N/A';
+
+$PAGE->requires->js(new moodle_url('/theme/oes/javascript/exam_nav.js'));
+
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
+    'wwwroot' => $CFG->wwwroot,
     'output' => $OUTPUT,
     'bodyattributes' => $bodyattributes,
     'sidepreblocks' => $blockshtml,
@@ -30,6 +37,9 @@ $templatecontext = [
     'is_secure_exam' => true,
     'exam_secure_badge' => get_string('secure_exam_active', 'theme_oes'),
     'exam_secure_warning' => get_string('secure_exam_warning', 'theme_oes'),
+    'candidate_name' => $candidate_name,
+    'candidate_id' => $candidate_id,
+    'session_time' => userdate(time(), get_string('strftimedatetimeshort', 'langconfig')),
 ];
 
 if (empty($PAGE->layout_options['noactivityheader'])) {
